@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Essay Grader | ChatScholar</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="topbar">
+    <a class="brand" href="{{ url_for('home') }}">ChatScholar</a>
+    <div>
+      <a href="{{ url_for('chat') }}">PDF Chat</a>
+      <a class="active" href="{{ url_for('essay') }}">Essay Grader</a>
+    </div>
+  </nav>
+
+  <main class="shell grid">
+    <section class="panel">
+      <h1>Essay Grader</h1>
+      <form method="post">
+        <textarea name="essay" placeholder="Paste your essay here">{{ essay_text }}</textarea>
+        <button type="submit">Grade Essay</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Feedback</h2>
+      {% if result %}
+        <div class="score-card">
+          <span>Score</span>
+          <strong>{{ result.score }}/100</strong>
+          <p>{{ result.summary }}</p>
+        </div>
+
+        <div class="feedback-grid">
+          <article class="mini-card">
+            <h3>Strengths</h3>
+            <ul class="check-list good">
+              {% for item in result.strengths %}<li>{{ item }}</li>{% endfor %}
+            </ul>
+          </article>
+          <article class="mini-card">
+            <h3>Weaknesses</h3>
+            <ul class="check-list bad">
+              {% for item in result.weaknesses %}<li>{{ item }}</li>{% endfor %}
+            </ul>
+          </article>
+          <article class="mini-card wide">
+            <h3>Suggestions</h3>
+            <ul class="check-list idea">
+              {% for item in result.suggestions %}<li>{{ item }}</li>{% endfor %}
+            </ul>
+          </article>
+        </div>
+      {% else %}
+        <p class="muted">Your essay feedback will appear here.</p>
+      {% endif %}
+    </section>
+  </main>
+</body>
+</html>

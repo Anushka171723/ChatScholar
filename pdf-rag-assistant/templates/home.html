@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChatScholar</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="topbar">
+    <a class="brand" href="{{ url_for('home') }}">ChatScholar</a>
+    <div>
+      <a href="{{ url_for('chat') }}">PDF Chat</a>
+      <a href="{{ url_for('essay') }}">Essay Grader</a>
+    </div>
+  </nav>
+
+  <main class="shell hero">
+    <section>
+      <p class="eyebrow">PDF RAG Assistant</p>
+      <h1>Study documents and grade essays in one Flask app.</h1>
+      <p class="lede">Upload a PDF, ask questions from the document, or paste an essay for instant feedback.</p>
+      <div class="actions">
+        <a class="button primary" href="{{ url_for('chat') }}">Start PDF Chat</a>
+        <a class="button" href="{{ url_for('essay') }}">Grade Essay</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

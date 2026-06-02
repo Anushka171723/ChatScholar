@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF Chat | ChatScholar</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="topbar">
+    <a class="brand" href="{{ url_for('home') }}">ChatScholar</a>
+    <div>
+      <a class="active" href="{{ url_for('chat') }}">PDF Chat</a>
+      <a href="{{ url_for('essay') }}">Essay Grader</a>
+    </div>
+  </nav>
+
+  <main class="shell grid">
+    <section class="panel">
+      <h1>PDF Chat</h1>
+      <form method="post" enctype="multipart/form-data" class="upload">
+        <input type="file" name="pdf" accept="application/pdf" multiple>
+        <button type="submit">Upload</button>
+      </form>
+      {% if upload_message %}<p class="notice">{{ upload_message }}</p>{% endif %}
+      <h2>Documents ({{ files|length }})</h2>
+      {% if files %}
+        <ul class="file-list">
+          {% for file in files %}<li>{{ file }}</li>{% endfor %}
+        </ul>
+      {% else %}
+        <p class="muted">No PDFs uploaded yet.</p>
+      {% endif %}
+    </section>
+
+    <section class="panel chat-panel">
+      <div id="messages" class="messages">
+        <article class="welcome-card" id="welcome-card">
+          <h2>Welcome to PDF Chat</h2>
+          <ul>
+            <li>Upload one or more PDFs</li>
+            <li>Ask questions about the document</li>
+            <li>Get AI-powered answers using RAG</li>
+          </ul>
+          <p class="supported">Supported formats: <span>PDF</span></p>
+        </article>
+      </div>
+      <form id="chat-form" class="chat-form">
+        <input id="question" type="text" autocomplete="off" placeholder="Ask about your PDF">
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

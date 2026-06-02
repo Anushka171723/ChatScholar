@@ -1,0 +1,8 @@
+flask
+python-dotenv
+groq
+faiss-cpu
+langchain
+langchain-text-splitters
+pypdf
+werkzeug
